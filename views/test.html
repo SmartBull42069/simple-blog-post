@@ -1,0 +1,30 @@
+<% if (list.length>0) { %>
+    <% for( post in list ) { %>
+       <% for( title in list[post] ) { %>
+        <div class="<%= post %> my-4 border border-dark rounded" >
+           <h1><%= title %></h1>
+           <p><%= list[post][title] %></p>
+           <form action="/delete" method="post" style="display: inline-block;">
+           <button type="submit" class="btn btn-dark border-4 border-dark my-1" value="<%= post %>" name="delete">Delete</button>
+            </form>
+            <form action="/edit" method="post" style="display: inline-block;">
+           <button type="submit"class="btn btn-dark border-4 border-dark my-1" value="<%= post %>" name="edit">edit</button>
+            </form>
+
+            <div class="<%= post %>Change invisible">
+                <form action="/change" method="post" id="submission">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" class="form-control form-control border border-warning border-3" id="exampleFormControlInput1" name="title" placeholder="Something eye catching" required value="<%= title %>">
+                    <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Post</label>
+                    <textarea class="form-control border border-warning border-3" id="exampleFormControlTextarea1" rows="3" name="textArea" required><%= list[post][title] %></textarea>
+                    
+                    <button type="submit" class="btn btn-dark border-4 border-dark my-1" value="save" name="<%= post %>">save</button>
+                </form>
+                <form action="/cancel" method="post" style="display: inline-block;">
+                    <button type="submit" class="btn btn-dark border-4 border-dark my-1" value="cancel" name="<%= post %>">cancel</button>
+                </form>
+            </div>
+                <% } %>
+                <% } %>
+             <% } %>
